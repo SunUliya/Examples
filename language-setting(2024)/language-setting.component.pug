@@ -1,0 +1,14 @@
+.setting-section__header
+    .setting-section__title Language
+form.setting-section__settings('[formGroup]'='form')
+    form-dropdown.small(
+        'formControlName'='language'
+        '[isRequired]'='true'
+        '[list]'='langList'
+        '[selectedIds]'='["en"]'
+    )
+        ng-template('#optionTemplate'='' 'let-context'='')
+            info-item-text(
+                '[class.checked]'='context.checked'
+                '[text]'='context.item.value'
+            )

@@ -1,0 +1,66 @@
+form(
+    '[formGroup]'='form'
+    autocomplete='off'
+)
+    fieldset.form__fieldset.small
+        .input__wrap
+            label.label.required(for='title-input') Title
+            text-input(
+                formControlName='title'
+                id='title-input'
+                placeholder='Type here'
+                maxlength='255'
+            )
+            validation-message(controlKey='title' '[validateOnSubmission]'='true')
+        .input__wrap('*ngIf'='mode === "create"')
+            label.required(form-input-label text='Project' for='project-input')
+            form-dropdown(
+                formControlName='project'
+                '[attr.data-invalid-control]'='form.get("project").invalid ? "project" : null'
+                'id'='project-input'
+                '[isRequired]'='true'
+                '[getService]'='projectsService'
+                '[getQuery]'='params'
+            )
+                ng-template('#optionTemplate'='' 'let-context'='')
+                    project-list-option('[context]'='context')
+            validation-message(controlKey='project' '[validateOnSubmission]'='true')
+    .test-step-container(
+        cdkDropList
+        cdkDropListLockAxis='y'
+        '(cdkDropListDropped)'='onDrop($event)'
+    )
+        test-step(
+            '*ngFor'='let step of steps; index as i'
+            cdkDrag
+            cdkDragBoundary='.test-step-container'
+            'layout'='row'
+            '[step]'='step'
+            '[sequence]'='i + 1'
+            '[projectId]'='project?.id'
+            '[testCaseId]'='sharedStepsId'
+            '[attachments]'='attachments | attachments'
+            '[fullHover]'='false'
+            '[editable]'='true'
+            '(deleteTestStep)'='onDeleteTestStep(step)'
+            '(testStepEdited)'='onEditTestStep({testStep: $event, index: i})'
+            '(attachmentsAdded)'='onAttachmentsAdded($event)'
+        )
+            z-svg-icon(
+                'width'='6px'
+                'height'='24px'
+                'src'='drag-dots'
+                'classes'='grey pointer with-feedback'
+                cdkDragHandle
+            )
+    test-step-form(
+        'layout'='row'
+        '[counter]'='steps.length + 1'
+        '[projectId]'='project?.id'
+        '[isDisabled]'='!project'
+        '[testCaseId]'='sharedStepsId'
+        '[attachments]'='attachments | attachments'
+        '[attachmentsEntityType]'='attachmentsEntityType'
+        '(submitted)'='onTestStepCreated($event)'
+        '(attachmentsAdded)'='onAttachmentsAdded($event)'
+    )
