@@ -1,0 +1,53 @@
+<div class="z-popup-body">
+    <z-popup-header class="single" text="Migration export"></z-popup-header>
+    <div class="notes">All tasks in space will be included into migration</div>
+    <form [formGroup]='form' class="switchers">
+        <z-switch-wrapper>
+            <z-switch-label text="Include child tasks and subtasks"></z-switch-label>
+            <z-switch 
+                class="extra-small" 
+                formControlName="includeChildTasks">
+            </z-switch>
+        </z-switch-wrapper>
+        <z-switch-wrapper>
+            <z-switch-label text="Export time logs records of selected tasks into CSV"></z-switch-label>
+            <z-switch 
+                class="extra-small" 
+                formControlName="includeTimeLogs">
+            </z-switch>
+        </z-switch-wrapper>
+        <form-dropdown 
+            class="full-width" 
+            formControlName="platform" 
+            [isRequired]="true" 
+            placeholder="Select where you would like to migrate" 
+            [list]="migrationList">    
+            <ng-template #optionTemplate let-context>
+                <info-item-text 
+                    [text]="context.item.name"
+                    [class.checked]="context.checked">
+                </info-item-text>
+            </ng-template>
+        </form-dropdown>
+        @if(isVisableJiraUserGroupName) {
+            <text-input
+                class="small-text"
+                formControlName="jiraUserGroupName" 
+                placeholder="Insert Jira users group name"
+                maxlength="255"
+                minlength="2">
+            </text-input>
+        }
+    </form>
+</div>
+
+<z-popup-footer class="single">
+    <button class="button small" (click)="onCancel()">
+        <span>Cancel</span>
+    </button>
+    <z-apply-button 
+        title="export"
+        [disabled]="!form.dirty || form.invalid" 
+        (clicked)="onApply()">
+    </z-apply-button>
+</z-popup-footer>

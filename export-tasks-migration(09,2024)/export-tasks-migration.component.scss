@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+
+    z-svg-icon {
+        margin-left: 2px;
+    }
+}
+
+div {
+    font-size: 13px;
+    color: var(--color-2);
+    cursor: pointer;
+
+    &:hover {
+        color: var(--color-70);        
+    }
+
+    &.red {
+        color: var(--color-1);
+    }
+}
