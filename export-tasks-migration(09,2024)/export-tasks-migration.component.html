@@ -1,0 +1,14 @@
+<div 
+    [ngClass]="{red: isPopupVisible, disabled: !migrationParams.activeSpaceId || !(migrationParams?.bulkProjectId || migrationParams?.projectIdInUrl)}"
+    (click)="onTogglePopup($event)"    
+>Migration  export</div>
+
+@if(!migrationParams.activeSpaceId || !(migrationParams?.bulkProjectId || migrationParams?.projectIdInUrl)) {
+    <z-svg-icon
+        class="info"
+        width='14px'
+        height='14px'
+        src='info-grey'
+        [zTooltip]='!migrationParams.activeSpaceId ? spaceTooltip : projectTooltip'
+        [zTooltipWidth]='210'/>
+}

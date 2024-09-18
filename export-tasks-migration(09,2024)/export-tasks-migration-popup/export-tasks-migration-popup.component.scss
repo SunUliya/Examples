@@ -1,0 +1,47 @@
+@import 'abstracts/var';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-3-background);
+    border-radius: 6px;
+    box-shadow: 0 -10px 40px 0 var(--shadow-color-5);
+
+    z-switch-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+        padding: 0 15px;
+    }
+
+    .notes {
+        font-size: 10px;
+        color: var(--color-2);
+        padding: 5px 15px 15px;
+    }
+
+    button.small.button {
+        span {
+            vertical-align: baseline;
+        }
+    }
+
+    form-dropdown {
+        display: block;
+        padding: 15px;
+    }
+
+    text-input {
+        display: block;
+        width: auto;
+        margin: 0 15px 15px;
+    }
+
+    z-apply-button {
+        margin-left: 10px;
+    }
+}
