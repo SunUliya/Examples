@@ -103,3 +103,7 @@ export class ExportTasksMigrationPopupComponent implements OnInit {
         this.exported.emit();
     }
 }
+
+function takeUntilDestroyed(destroyRef: DestroyRef): any {
+    throw new Error('Function not implemented.');
+}
